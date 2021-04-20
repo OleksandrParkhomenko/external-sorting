@@ -1,3 +1,9 @@
 from input_generation import *
+from external_sorting import ExternalMergeSort
+import os
+import sys
 
-print(generate_input_file(1000))
+#generate_input_file(100_000_000) # 100 mb
+
+
+
