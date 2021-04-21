@@ -3,19 +3,11 @@ from external_sorting import ExternalMergeSort
 import os
 import sys
 
-#generate_input_file(100_000_000) # 100 mb
-
-# test = generate_input_file(10000000)
-# merge = ExternalMergeSort(test, 1000000)
-# merge.sort()
-
-# run || run --example
 if len(sys.argv) == 1 or (len(sys.argv) == 2 and sys.argv[1] == '--example'):
     print("Running example...")
     merge = ExternalMergeSort('data/example100mb.txt', 1000000)
     result = merge.sort()
     print("Result file: {}".format(result))
-# run --random
 elif len(sys.argv) == 3 and sys.argv[1] == '--random':
     print("Running example with randomly generated input data...")
     try:
@@ -29,7 +21,6 @@ elif len(sys.argv) == 3 and sys.argv[1] == '--random':
             print("Result file: {}".format(result))
     except ValueError as e:
         print("Invalid file size")
-# run --ram 100000 --file example100mb.txt
 elif len(sys.argv) == 5 and sys.argv[1] == '--ram' and sys.argv[3] == '--file':
     try:
         available_ram = int(sys.argv[2])
