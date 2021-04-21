@@ -11,7 +11,8 @@ class ExternalMergeSort:
         self.available_ram = available_ram
         self.file_path = file_path
         self.dir = os.path.join(os.path.dirname(file_path), 'tmp')  # temporary folder for storing chunks of data
-        os.mkdir(self.dir)
+        if not os.path.exists(self.dir):
+            os.mkdir(self.dir)
         self.chunks = []  # list for storing file paths of chunks of data
 
     def sort(self):
@@ -28,6 +29,10 @@ class ExternalMergeSort:
         print("Sorted successfully")
         return file_path
 
+    def __close_files(self, files):
+        for file in files:
+            file.close()
+
     def __k_way_merge(self):
         print("Merging chunks into result file")
         files = list(map(lambda f: open(f, 'r'), self.chunks))
@@ -38,6 +43,7 @@ class ExternalMergeSort:
         with open(result_path, 'a+') as result_file:
             for line in sorted_complete_data:
                 result_file.write(line)
+        self.__close_files(files)
         return result_path
 
     def __remove_tmp_files(self):
